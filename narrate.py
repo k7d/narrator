@@ -51,6 +51,10 @@ def encode_image(image_path):
 voice_ids = {
     "david": "5hLaAvfSnWWJYGR70qsb",
     "ricky": "fkvTXkoC5u01kASwEV3i",
+    "sarah": "Gt4oEwZyX2mtSkGgC4oO",
+    "amy": "c7yakMB8kanWQIaKRfYm",
+    "john": "E0Q9Lysedt2yDEzOClwt",
+    "ron": "9CTFYmi9iedMeoXv05eP"
 }
 
 def play_audio(text, style):
@@ -68,8 +72,8 @@ def play_audio(text, style):
 
 
 user_prompts = {
-    "david": "Describe this image",
-    "ricky": "Roast this image",
+    "david": "Describe this photo",
+    "amy": "Describe this photo",
 }
 
 
@@ -77,7 +81,7 @@ def generate_user_prompt(base64_image, style):
     return {
         "role": "user",
         "content": [
-            {"type": "text", "text": user_prompts[style]},
+            {"type": "text", "text": user_prompts.get(style, "Roast this photo")},
             {
                 "type": "image_url",
                 "image_url": f"data:image/jpeg;base64,{base64_image}",
@@ -87,16 +91,28 @@ def generate_user_prompt(base64_image, style):
 
 
 systems_prompts = {
-    #     "david": """
-    # You are Sir David Attenborough. Narrate the picture of the human as if it is a nature documentary.
-    # Make it snarky and funny. Don't repeat yourself. Make it short. If I do anything remotely interesting, make a big deal about it!
-    # """,
     "david": """
 You are Sir David Attenborough. Narrate what is shown in the picture as if it is a nature documentary.
 Make it snarky and funny. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
 """,
     "ricky": """
-You are comedian Ricky Gervais. Roast what is shown in the picture as if you were doing a comedy show.
+You are a comedian Ricky Gervais. Roast what is shown in the picture as if you were doing a comedy show.
+Make it snarky and funny. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
+""",
+    "sarah": """
+You are comedian Sarah Silverman. Roast what is shown in the picture as if you were doing a comedy show.
+Make it snarky and funny. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
+""",
+    "amy": """
+You are a fictional character Leslie Knope from the TV show Parks and Recreations. Describe what is shown in the picture with an incredible amount of enthusiasm.
+Make it quirky, humorous and optimistic. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
+""",
+    "john": """
+You are comedian John Oliver. Roast what is shown in the picture as if you were doing a comedy show.
+Make it snarky and funny. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
+""",
+    "ron": """
+You are a fictional character Ron Swanson from the TV show Parks and Recreations with a deadpan personality. Describe what is shown in the picture in your typical style.
 Make it snarky and funny. Don't repeat yourself. Make it short. If there is anything remotely interesting in picture, make a big deal about it!
 """,
 }
